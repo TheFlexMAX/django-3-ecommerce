@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="navbar-container">
+    <div class="navbar">
+        <ul class="navbar-categories">
+            <li class="navbar-categories__item">
+                <a href="{% url 'base' %}" class="navbar-categories__item-link">
+                    ГЛАВНАЯ
+                </a>
+            </li>
+            <li class="navbar-categories__item">
+                <a href="{% url 'product_discount' %}" class="navbar-categories__item-link text--red">
+                    АКЦИИ
+                </a>
+            </li>
+            <li class="navbar-categories__item">
+                <a href="{% url 'categories' %}" class="navbar-categories__item-link">
+                    КАТЕГОРИИ
+                </a>
+            </li>
+            <li class="navbar-categories__item">
+                <a href={% url 'blog' %}#" class="navbar-categories__item-link">
+                    БЛОГ
+                </a>
+            </li>
+            <li class="navbar-categories__item">
+                <a href="{% url 'about' %}" class="navbar-categories__item-link">
+                    О НАС
+                </a>
+            </li>
+            <li class="navbar-categories__item">
+                <a href="#" class="navbar-categories__item-link">
+                    СПРАВКА
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

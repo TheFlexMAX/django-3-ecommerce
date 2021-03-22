@@ -1,0 +1,13 @@
+{% extends "account/email/base_message.txt" %}
+{% load account %}
+{% load i18n %}
+
+{% block content %}
+{% autoescape off %}
+{% user_display user as user_display %}
+
+Вы получили это письмо, потому-что пользователь {{ user_display }}
+предоставил вашу почту на сайте {{ site_domain }}.
+
+Если это были вы, то перейдите по этой ссылке {{ activate_url }} для активации профилоя
+{% endautoescape %}{% endblock %}

@@ -1,0 +1,45 @@
+{% load static %}
+
+{% block styles %}
+    <link href="{% static 'css/header.css' %}" rel="stylesheet">
+{% endblock %}
+
+<div class="header-container">
+    <!-- Header -->
+    <div class="logo-container">
+        <h1>Logo</h1>
+    </div>
+    <div class="searchbar-container">
+        <form action="{% url 'search' %}" method="GET" class="search-form">
+            <div class="search-form__input-wrapper">
+                <input type="text" class="search-form__input" name="search" value="{{ query }}">
+            </div>
+        </form>
+    </div>
+    <div class="userBar-container">
+        <ul class="header-actions">
+            <li class="header-actions__item header-actions__item-cart">
+                <a class="header__button" href="{% url 'cart' %}">
+                    <img src="{% static 'icons/shopping_cart-24px.svg' %}" class="material-icons material-icons-outlined" alt="">
+                    {% if total_products %}
+                        <span class="counter counter--red">{{ total_products }}</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li class="header-actions__item header-actions__item-profile">
+                {% if not user.is_authenticated %}
+                    <a class="header__button" href="{% url 'account_login' %}">
+                        <img src="{% static 'icons/account_circle-24px.svg' %}" class="material-icons material-icons-outlined" alt="">
+                        <span class="online-state counter--red">0</span>
+                    </a>
+                {% else %}
+                    <a class="header__button" href="{% url 'profile' %}">
+                        <img src="{% static 'icons/account_circle-24px.svg' %}" class="material-icons material-icons-outlined" alt="">
+                        <span class="online-state counter--green">0</span>
+                    </a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+    <!-- /Header -->
+</div>

@@ -1,0 +1,49 @@
+#main__slider {
+    margin: 0px auto;
+    width: 87%;
+    height: 370px;
+    display: flex;
+}
+
+.ot-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ot-slider .ot-prev-next .ot-prev-button {
+    background: linear-gradient(90deg, rgba(254, 248, 235, 0.3) 0%,
+                rgba(254, 248, 235, 0) 126.67%);
+}
+
+.ot-slider .ot-prev-next .ot-next-button {
+    background: linear-gradient(270deg, rgba(254, 248, 235, 0.3) 0%,
+                rgba(254, 248, 235, 0) 126.67%);
+}
+
+.ot-slider .ot-prev-next .ot-prev-button,
+.ot-slider .ot-prev-next .ot-next-button{
+    width: 20%;
+    height: 100%;
+    top: 6%;
+    overflow: hidden;
+}
+
+.ot-slider .ot-prev-next .ot-prev-button:hover {
+    background: linear-gradient(90deg, #FEF8EB -95%, rgba(254, 248, 235, 0.1) 126.67%);
+}
+
+.ot-slider .ot-prev-next .ot-next-button:hover {
+    background: linear-gradient(270deg, #FEF8EB -95%, rgba(254, 248, 235, 0.1) 126.67%);
+}
+
+.slider-prev-button {
+    transform: rotate(90deg);
+}
+.slider-next-button {
+    transform: rotate(270deg);
+}
+
+.slider-prev-button, .slider-next-button {
+    font-size: 4em;
+}

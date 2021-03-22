@@ -1,0 +1,117 @@
+.content_type-checkout {
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.checkout__content-section {
+    width: 100%;
+    padding-bottom: 5%;
+    position: relative;
+}
+
+.checkout__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.checkout__container {
+    width: 100%;
+}
+
+.checkout__form {
+    width: 100%;
+    max-width: 460px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.checkout__form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkout__form-field {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.checkout__form-field input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 48px;
+    background: transparent;
+    border: 2px solid #484016;
+    border-top: 2px solid #FFFFFF;
+    border-right: 2px solid #FFFFFF;
+    font-size: .875rem;
+    color: #484016;
+    padding: 0 16px;
+    -webkit-transition: background .3s;
+    transition: background .3s;
+}
+
+.checkout__form-field input:focus {
+    background: #fff;
+}
+
+
+.checkout__form-btn {
+    width: 235px;
+    height: 54px;
+    background-color: transparent;
+    border: 2px solid #484016;
+    cursor: pointer;
+    -webkit-display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #484016;
+    font-size: .875rem;
+    line-height: 16px;
+    text-align: center;
+    margin: 32px 0;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.checkout__form-btn:hover {
+    background: #eaeaea;
+}
+
+.checkout__form-btn:active {
+    background: #dadada;
+}
+
+.form-field input:-webkit-autofill,
+.form-field input:-webkit-autofill:hover,
+.form-field input:-webkit-autofill:focus,
+.form-field input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}

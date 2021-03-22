@@ -1,0 +1,113 @@
+.header-container {
+    width: 100%;
+    height: 100%;
+    max-width: 1920px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+}
+
+/*
+    Панель с лого
+*/
+.header-container > .logo-container {
+    width: 25%;
+    display: flex;
+}
+
+.logo-container > h1 {
+    font-size: 40px;
+    line-height: 0.5;
+}
+/*
+    Конец панель с лого
+*/
+
+/*
+    Строка поиска
+*/
+.header-container > .searchbar-container {
+    width: 50%;
+    display: flex;
+}
+
+.header-container >
+    .searchbar-container >
+    .search-form >
+    .search-form__input-wrapper >
+    .search-form__input {
+    width: 100%;
+    height: 30px;
+    border: 2px solid #484016;
+    border-top: 2px solid #FFFFFF;
+    border-right: 2px solid #FFFFFF;
+    border-radius: 0;
+    color: #FBF0E4;
+    background: url(../icons/search-24px.svg) no-repeat center right;
+}
+
+.header-container >
+.searchbar-container >
+.search-form >
+.search-form__input-wrapper >
+.search-form__input:focus {
+    background-color: #F0F0F0;
+    color: #000000;
+}
+
+.header-container,
+.searchbar-container,
+.search-form,
+.search-form__input-wrapper,
+.search-form__input {
+    width: 100%;
+}
+
+/*
+    Конец строки поиска
+*/
+
+/*
+    Пользовательская панель
+*/
+.header-container > .userBar-container {
+    width: 25%;
+    display: flex;
+}
+
+.header-container > .userBar-container > ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.header__button {
+    position: relative;
+}
+
+.header__button > .material-icons-outlined {
+    color: #FAFAFA;
+    font-size: 30px;
+    height: 35px;
+    -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/*
+    Конец пользовательской панели
+*/
+
+
+@media (max-width: 500px) {
+    .header-container {
+        width: 100%;
+        height: 100%;
+        max-width: 1920px;
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+    }
+}

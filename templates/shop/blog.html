@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Блог
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="content_type-blog">
+        <div class="page-header">
+            <h1 class="text__page-header">
+                Наш блог
+            </h1>
+        </div>
+
+        <div class="blog__content-section">
+            <div class="blog-posts-container">
+                <div class="blog-posts-container__card-wrapper">
+
+                    {% for post in posts %}
+                        <div class="blog-post__card">
+                            <div class="blog-post__card-body">
+                                <div class="blog-post__card-body--post-img">
+                                    <a href="{% url 'blog_detail' id=post.id %}">
+                                        <img src="{{ post.preview_img.url }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="blog-post__card-post-info">
+                                    <div class="blog-post__card-body-date">
+                                        <p>{{ post.date_created }}</p>
+                                    </div>
+                                    <div class="blog-post__card-body-title">
+                                        <h4>{{ post.title }}</h4>
+                                    </div>
+                                    <div class="blog-post__card-body-description">
+                                        <p class="text--brown">{{ post.preview_content | safe | truncatechars:120 }}</p>
+                                    </div>
+                                    <div class="blog-post__card-post-info__btn-container">
+                                        <a href="{% url 'blog_detail' id=post.id %}">
+                                            <button class="blog-post__card-post-info__btn">
+                                                ЧИТАТЬ ДАЛЕЕ
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                    {% include 'include/pagination.html' %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="background-circle--top"></div>
+        <div class="background-circle--bottom"></div>
+
+    </div>
+{% endblock %}
+

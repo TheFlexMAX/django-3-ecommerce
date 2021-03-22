@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Корзина
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/cart.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="content_type-cart">
+        <div class="page-header">
+            <h1 class="text__page-header">
+                Корзина
+            </h1>
+        </div>
+
+        <div class="cart__content-section">
+            <div class="cart-products-container">
+                <div class="cart-products-container__card-wrapper">
+
+                    {% for cart_product in cart_products %}
+                    <div class="cart-products__card">
+                        <div class="cart-products__card-body">
+                            <div class="cart-products__card-body--product-img">
+                                <img src="{{ cart_product.product.get_main_img.url }}" alt="">
+                            </div>
+                            <div class="cart-products__card-body__product-info">
+                                <div class="cart-products__card-body-title">
+                                    <h4>{{ cart_product.product.title }}</h4>
+                                </div>
+                                <div class="cart-products__card-body-counter">
+                                    <form action="{% url 'change_qty_cart' category=cart_product.product.category.slug slug=cart_product.product.slug %}" method="Post">
+                                        {% csrf_token %}
+                                        <div class="counter-product">
+                                            <button class="counter-product--minus" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">-</button>
+                                            <input type="number" class="form-control" name="qty" min="1" value="{{ cart_product.qty }}" readonly>
+                                            <button class="counter-product--plus" type="button" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.onchange();">+</button>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Изменить кол-во" data-goods_id="{{ product.id }}" data-action="addToCart">
+                                    </form>
+                                </div>
+                                <div class="cart-products__card-body-total-sum">
+                                    <p class="text--brown">{{ cart_product.product.price }}</p>
+                                </div>
+                                <a href="{% url 'delete_from_cart' category=cart_product.product.category.slug slug=cart_product.product.slug %}">
+                                    <button class="cart-products__remove-button" data-goods_id="{{ product.id }}" data-action="remove"></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="cart__summary-container">
+                <div class="cart__summary-qty">
+                    <p>ИТОГО: {{ cart.total_products }}</p>
+                </div>
+                <div class="cart__summary-priceAndBtn">
+                    <div class="cart__summary-final-price">
+                        <p>{{ cart.final_price }}</p>
+                    </div>
+                    <a href="{% url 'checkout' %}">
+                        <button class="cart__summary__checkout-button">ОФОРМИТЬ ЗАКАЗ</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="background-circle--top"></div>
+        <div class="background-circle--bottom"></div>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

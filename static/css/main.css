@@ -1,0 +1,406 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    background-color: #F0F0F0;
+    font-family: Arial, serif;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+    margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+div, table {
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+body {
+    scrollbar-color: #000000 #d0d0d0;
+    scrollbar-width: thin;
+    overflow: overlay;
+}
+
+*::-webkit-scrollbar {
+    width: 20px;               /* width of the entire scrollbar */
+    background: transparent;
+    overflow: visible;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);        /* color of the tracking area */
+    height: 10px;
+    border-left: 1px solid #000000;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(90, 90, 90, 0);   /* color of the scroll thumb */
+    border-radius: 8px;       /* roundness of the scroll thumb */
+    border: 2px solid #000000;  /* creates padding around scroll thumb */
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    top: 0;
+    background: #7BB793;
+}
+
+nav {
+    top: 70px;
+}
+
+header, nav {
+    position: sticky;
+    z-index: 1;
+}
+
+nav, header, footer {
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.containerr {
+    /*display: flex;*/
+    justify-content: center;
+    width: 100%;
+    min-height: calc(100vh);
+    /*margin-top: -130px;*/
+}
+
+.content {
+    width: 100%;
+    padding: 0 5%;
+    max-width: 1920px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.counter {
+    position: absolute;
+    top: 0;
+    transform: translate(90%,-70%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 18px;
+    height: 23px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 50px;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.online-state {
+    position: absolute;
+    top: 0;
+    transform: translate(90%,-70%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 18px;
+    height: 23px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 50px;
+    font-size: 12px;
+    color: transparent;
+}
+
+.page-header {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding: 5% 0 8% 0;
+}
+
+.page-header__filter-container {
+    position: absolute;
+    left: 0;
+    align-self: center;
+}
+
+.filter-btn {
+    background: transparent;
+    background: url(../icons/filter_alt_brown_24dp.svg) no-repeat center;
+    background-size: cover;
+    padding: 1.8em;
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+}
+
+.text__page-header {
+    padding: 0 10%;
+    border-bottom: 2px solid #484016;
+}
+
+.background-circle--top {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(180deg, rgba(178, 223, 199, 0.5) 0%, rgba(123, 183, 147, 0) 77.09%);
+    -moz-border-radius: 175px;
+    -webkit-border-radius: 175px;
+    border-radius: 175px;
+    z-index: -1;
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    top: 20%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.background-circle--bottom {
+    width: 700px;
+    height: 700px;
+    background: linear-gradient(180deg, #C5B59C 0%, rgba(193, 228, 201, 0) 100%);
+    -moz-border-radius: 350px;
+    -webkit-border-radius: 350px;
+    border-radius: 350px;
+    z-index: -1;
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    top: 80%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.counter--red {
+    background: #E9591E;
+}
+
+.counter--green {
+    background: #28a745;
+}
+
+.text--red {
+    color: #E9591E;
+}
+
+.text--white {
+    color: #FFFFFF;
+}
+
+.text--beige {
+    color: #EBDDCD;
+}
+
+.text--brown {
+    color: #484016;
+}
+
+.text--brownAndWhite-outlined {
+    border-top: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    border-bottom: 1px solid #484016;
+    border-left: 1px solid #484016;
+    padding: 5px 15px;
+    text-decoration: none;
+}
+
+.text--brown-outlined {
+    border: 1px solid #484016;
+    padding: 5px 15px;
+    text-decoration: none;
+    align-self: center;
+}
+
+.text--brown-outlined--bold {
+    border: 2px solid #484016;
+    padding: 5px 15px;
+    text-decoration: none;
+}
+
+.text--outlined-without-top {
+    border-top: none
+}
+
+.text--outlined-without-right {
+    border-right: none
+}
+
+.text--outlined-without-left {
+    border-left: none;
+}
+
+.text--opacity-half {
+    opacity: 0.5;
+}
+
+.pagination {
+    text-align: center;
+    justify-content: center;
+    width: 50%;
+    padding: 2px 0;
+    position: relative;
+    align-self: center;
+    align-items: center;
+    border-top: 2px solid #807268;
+    border-bottom: 2px solid #807268;
+}
+
+.pagination-action--next {
+    background: transparent;
+    background: url(../icons/keyboard_tab_brown_24dp.svg) no-repeat center;
+    background-size: contain;
+    top: 50%;
+    transform: translate(0,-50%) rotate(0deg);
+    right: 10%;
+}
+
+.pagination-action--prev {
+    background: transparent;
+    background: url(../icons/keyboard_tab_brown_24dp.svg);
+    background-size: contain;
+    top: 50%;
+    transform: translate(0,-50%) rotate(180deg);
+    left: 10%;
+}
+
+.pagination-action--next, .pagination-action--prev {
+    display: inline-block;;
+    padding: 0.5em;
+    font-size: 1.3em;
+    border: none;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+}
+
+.pagination-number {
+    padding: 0.5em 0.8em;
+    color: #484016;
+}
+
+.pagination-current {
+    background: rgba(123, 183, 147, 0.5);
+}
+
+.account-control-btn {
+    width: 235px;
+    height: 54px;
+    background-color: transparent;
+    border: 2px solid #484016;
+    cursor: pointer;
+    -webkit-display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #484016;
+    font-size: .875rem;
+    line-height: 16px;
+    text-align: center;
+    margin: 32px 0;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.account-control-btn:hover {
+    background: #eaeaea;
+}
+
+.account-control-btn:active {
+    background: #dadada;
+}
+
+.account-control-btn input:-webkit-autofill,
+.account-control-btn input:-webkit-autofill:hover,
+.account-control-btn input:-webkit-autofill:focus,
+.account-control-btn input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}

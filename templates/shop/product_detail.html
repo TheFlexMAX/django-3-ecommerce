@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+
+{% block styles %}
+    <!-- Splide css -->
+    <link rel="stylesheet" href="{% static 'css/splide.min.css' %}">
+
+    <link href="{% static 'css/splideCustom.css' %}"    rel="stylesheet">
+    <link href="{% static 'css/product_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="content_type-prod-detail">
+
+        <div class="product-photoviewer-specification-row">
+
+            <div class="product__photoviewer-container">
+                <div class="product__photoviewer">
+
+                    <div class="product__photoviewer__viewer">
+                        <div id="primary-slider" class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    {% for photo in product_images %}
+                                    <li class="splide__slide">
+                                        <img src="{{ photo.image.url }}">
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product__photoviewer__carousel">
+                        <div id="secondary-slider" class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    {% for photo in product_images %}
+                                        <li class="splide__slide">
+                                            <img src="{{ photo.image.url }}">
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="prod-detail__product-specification-container">
+                <div class="product-about">
+                    <div class="product-about__header-container">
+                        <h2>{{ product.title }}</h2>
+                    </div>
+                    <div class="product-about__price-container">
+                        {% if product.discount_price %}
+                            <h2><del>{{ product.discount_price }}</del></h2>
+                            <h4 class="text--red">{{ product.price }}</h4>
+                        {% else %}
+                            <h4>{{ product.price }}</h4>
+                        {% endif %}
+                    </div>
+                    <div class="product-about__common-description-container">
+                        <p class="product-about__common-description">
+                            {{ product.description | safe }}
+                        </p>
+                    </div>
+                    <div class="product-about__size-chooser-container">
+                        <select name="" id="" class="product__size-chooser">
+                            <option value="">ВЫБРАТЬ РАЗМЕР</option>
+                            <option value="">XS</option>
+                            <option value="">S</option>
+                            <option value="">M</option>
+                            <option value="">L</option>
+                            <option value="">XL</option>
+                        </select>
+                    </div>
+                    <div class="product__buy-button-container">
+                        <a href="{% url 'add_to_cart' category=product.category.slug slug=product.slug %}">
+                            <button class="buy-button text--red" data-goods_id="{{ product.id }}" data-action="addToCart">В КОРЗИНУ</button>
+                        </a>
+                    </div>
+                    <div class="product__delivery-button-container">
+                        <a href="">
+                            <p class="delivery-button">ДОСТАВКА</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'include/product_specifications.html' %}
+        </div>
+
+
+        <div class="background-circle--top"></div>
+        <div class="background-circle--bottom"></div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+    <!-- Splide JS -->
+    <script type="text/javascript" src="{% static 'js/splide.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/splideCustom.js' %}"></script>
+{% endblock %}

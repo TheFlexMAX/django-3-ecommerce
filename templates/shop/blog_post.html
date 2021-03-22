@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/blog_post.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="content_type-blog-detail">
+        <div class="page-header">
+            <h1 class="text__page-header">
+                {{ post.title }}
+            </h1>
+        </div>
+
+        <div class="blog-detail__content-section">
+            <div class="blog-detail__container">
+                <div class="blog-detail__description">
+                    {{ post.preview_content }}
+                </div>
+                <div class="blog-detail__content">
+                    {{ post.content | safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="background-circle--top"></div>
+        <div class="background-circle--bottom"></div>
+
+    </div>
+{% endblock %}
+

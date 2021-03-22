@@ -1,0 +1,27 @@
+.content_type-blog-detail {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.blog-detail__content-section {
+    width: 100%;
+    padding-bottom: 5%;
+    position: relative;
+}
+
+.blog-detail__description {
+    display: flex;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+    font-size: 1.4em;
+    padding-bottom: 2%;
+}
+
+.blog-detail__content {
+    font-size: 1.6em;
+}

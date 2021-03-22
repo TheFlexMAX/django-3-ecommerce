@@ -1,0 +1,13 @@
+<div class="product-detail__header-container">
+    <h3>ДЕТАЛЬНОЕ ОПИСАНИЕ</h3>
+</div>
+<table class="product-detail__table">
+    <tbody>
+    {% for product_attribute_value in product_attributes_values_category %}
+        <tr>
+            <td>{{ product_attribute_value.attribute.name }}</td>
+            <td>{{ product_attribute_value.name }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

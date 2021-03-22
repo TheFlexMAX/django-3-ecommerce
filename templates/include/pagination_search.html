@@ -1,0 +1,36 @@
+<div class="pagination">
+    {% if queryset.has_previous %}
+
+        <a href="?page={{ queryset.previous_page_number }}&search={{ search }}">
+            <button class="pagination-action--prev"></button>
+        </a>
+        <a href="?page=1&search={{ search }}">
+            <button class="">1</button>
+        </a>
+
+    {% endif %}
+
+    {% for num in queryset.paginator.page_range %}
+
+        {% if queryset.number == num %}
+
+            <span class="pagination-number pagination-current">{{ num }}</span>
+
+        {% elif num > queryset|add:'-3' and num > queryset.number|add:'3' %}
+
+            <a class="pagination-number" href="?page={{ num }}&search={{ search }}">{{ num }}</a>
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% if queryset.has_next %}
+
+        <a href="?page={{ queryset.next_page_number }}&search={{ search }}">
+            <button class="pagination-action--next"></button>
+        </a>
+        <a href="?page={{ queryset.paginator.num_pages }}&search={{ search }}">
+            <button>{{ queryset.paginator.num_pages }}</button>
+        </a>
+    {% endif %}
+</div>

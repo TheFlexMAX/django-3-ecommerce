@@ -1,0 +1,222 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}Интернет магазин{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+
+    <!-- Material icons CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/main_page.css' %}"       rel="stylesheet">
+    <link href="{% static 'css/navbar.css' %}"          rel="stylesheet">
+    <link href="{% static 'css/main.css' %}"            rel="stylesheet">
+
+    {% block styles %}
+        <!-- otSlider -->
+        <link rel="stylesheet" href="{% static 'css/otslider.css' %}">
+        <link href="{% static 'css/otsliderCustom.css' %}"  rel="stylesheet">
+    {% endblock %}
+
+    <script>
+        let user = '{{ request.user }}'
+
+        // Функция получения данных из куков
+        function getCookie(name) {
+            // Получает массив данных элементов куков
+            let cookieArr = document.cookie.split(";")
+
+            for(let i = 0; i < cookieArr.length; i++) {
+              let cookiePair = cookieArr[i].split("=");
+
+              // Удаляет пробелы и сравнивает переданную строку с текущей
+              if (name === cookiePair[0].trim()) {
+                  // Декодирует значение кука из URI
+                  return decodeURIComponent(cookiePair[i]);
+              }
+            }
+
+            return null;
+        }
+
+        let cart = JSON.parse(getCookie('cart'));
+        // Создает куки корзины, если не было создано переданного кука
+        if (cart === null) {
+            cart = {};
+            document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+<header>
+    {% include 'include/header.html' %}
+</header>
+<nav>
+    {% include 'include/categories_navbar.html' %}
+</nav>
+
+<!-- Page Content -->
+<div class="containerr">
+    <div class="content">
+
+
+        {% block content %}
+            <div class="content_type-main">
+                <div class="main__slider-container">
+                    <div id="main__slider" class="ot-slider ot-slider-numeric-nav">
+                        <img src="https://images.unsplash.com/photo-1423530990185-af7dde1155fb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1409&q=80">
+                        <img src="https://images.unsplash.com/photo-1611081154836-4c6351de1819?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80">
+                        <img src="https://images.unsplash.com/photo-1498691055072-4a9a311fc197?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1268&q=80">
+                        <img src="https://images.unsplash.com/photo-1611081154836-4c6351de1819?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80">
+                    </div>
+                </div>
+                <div class="main__content-section">
+                    <div class="main__goods">
+                        <div class="goods-container">
+                            <div class="goods-container__header">
+                                <h2 class="text--brownAndWhite-outlined text--outlined-without-left text--beige">
+                                    ТОВАРЫ
+                                </h2>
+                            </div>
+                            <div class="goods-container__card-wrapper">
+                                {% for trend_product in trend_products %}
+
+                                <div class="goods__card">
+                                    <a href="{{ trend_product.product.get_absolute_url }}">
+                                        <div class="goods__card-background">
+                                            <img src="{{ trend_product.banner_img.url }}"
+                                                 alt=""
+                                                 class="goods__card-background-img">
+                                        </div>
+                                        <div class="goods__card-body">
+                                            <div class="goods__card-body-header">
+                                                <h3>{{ trend_product.product.title }}</h3>
+                                            </div>
+                                            <div class="goods__card-body-description">
+                                                <p>{{ trend_product.content }}</p>
+                                            </div>
+                                            <div class="goods__card-body-footer">
+                                                {% if trend_product.product.discount_price %}
+                                                    <div class="goods__card-body-footer-price">
+                                                        <p><del>{{ trend_product.product.discount_price }}</del></p>
+                                                    </div>
+                                                    <div class="goods__card-body-footer-price--discount text--red ">
+                                                        <p>{{ trend_product.product.price }}</p>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="goods__card-body-footer-price--discount">
+                                                        <p>{{ trend_product.product.price }}</p>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="main__popular__background-circle"></div>
+                    </div>
+
+                    <div class="main__popular">
+                        <div class="popular-container">
+                            <div class="popular-container__header">
+                                <h2 class="text--brownAndWhite-outlined text--outlined-without-left text--brown">
+                                    ПОПУЛЯРНЫЕ
+                                </h2>
+                            </div>
+                            <div class="popular_container__card-wrapper">
+
+                                {% for popular_product in popular_products %}
+                                    <div class="popular__card">
+                                        <a href="{{ popular_product.get_absolute_url }}">
+                                            <div class="popular__card-background">
+                                                <img src="{{ popular_product.get_main_img.url }}"
+                                                     alt=""
+                                                     class="popular__card-background-img">
+                                            </div>
+                                            <div class="popular__card-body">
+                                                <div class="popular__card-body-header">
+                                                    <h3>{{ popular_product.title }}</h3>
+                                                </div>
+                                                <div class="popular__card-body-footer">
+                                                    {% if popular_product.discount_price %}
+                                                        <div class="goods__card-body-footer-price">
+                                                            <p><del>{{ popular_product.discount_price }}</del></p>
+                                                        </div>
+                                                        <div class="goods__card-body-footer-price--discount text--red ">
+                                                            <p>{{ popular_product.price }}</p>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="goods__card-body-footer-price--discount">
+                                                            <p>{{ popular_product.price }}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+
+    </div>
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer>
+
+    {% include 'include/footer.html' %}
+
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+
+{% block js %}
+    <!-- otSlider JS -->
+    <script type="text/javascript" src="{% static 'js/otslider.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/otsliderCustom.js' %}"></script>
+{% endblock %}
+
+<!-- Custom JS -->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

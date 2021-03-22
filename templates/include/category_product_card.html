@@ -1,0 +1,26 @@
+<div class="products__card">
+
+    <div class="products__card-background">
+        <a href="{{ product.get_absolute_url }}">
+            <img src="{{ product.get_main_img.url }}" alt="">
+        </a>
+    </div>
+    <div class="products__card-body">
+        <a href="{{ product.get_absolute_url }}">
+            <div class="products__card-body-header">
+                <h3>{{ product.title }}</h3>
+            </div>
+        </a>
+        <div class="products__card-body-price-container">
+            {% if product.discount_price %}
+                <p class="product-price--discount"><del>{{ product.price }}</del></p>
+                <p class="product-price text--red">{{ product.discount_price }}</p>
+            {% else %}
+                <p class="product-price">{{ product.price }}</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'add_to_cart' category=product.category.slug slug=product.slug %}">
+            <button class="update-cart products__card-body__buy-button text--brown-outlined" data-goods_id="{{ product.id }}" data-action="addToCart">В корзину</button>
+        </a>
+    </div>
+</div>

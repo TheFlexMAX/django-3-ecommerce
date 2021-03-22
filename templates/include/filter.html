@@ -1,0 +1,31 @@
+<div class="filter-form">
+
+    <div class="filter-form-header">
+        <h4>Фильтр</h4>
+        <button class="close__filter-btn"></button>
+    </div>
+
+    <form action="" method="GET" class="filter-form__filters">
+        {% csrf_token %}
+        {% for field in filter_form.visible_fields %}
+
+            <div class="filter-form__filters-col">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+
+        {% endfor %}
+
+        {% for num in category_products.paginator.page_range %}
+
+            {% if category_products.number == num %}
+
+                <input type="hidden" value="{{ num }}" name="page" />
+
+            {% endif %}
+
+        {% endfor %}
+
+        <input type="submit" class="filter-form__filters-submit-btn" value="Подтвердить">
+    </form>
+</div>

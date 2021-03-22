@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Категории
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/categories.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="content_type-categories">
+
+    <div class="page-header">
+        <h1 class="text__page-header">
+            КАТЕГОРИИ
+        </h1>
+    </div>
+
+    <div class="categories__slider-container"></div>
+    <div class="categories__content-section">
+        <div class="categories-container">
+            <div class="categories-container__card-wrapper">
+
+                {% for category in categories %}
+
+                    {% include 'include/category_card.html' %}
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="background-circle--top"></div>
+    <div class="background-circle--bottom"></div>
+
+</div>
+{% endblock %}

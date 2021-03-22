@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load i18n %}
+
+
+{% block title %}
+    Выход
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/logout.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="content_type-logout">
+
+        <div class="page-header">
+            <h1 class="text__page-header">
+                Выход
+            </h1>
+        </div>
+
+        <div class="logout__container">
+            <h4>Вы действительно хотели выйти?</h4>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <button type="submit" class="account-control-btn">Выйти</button>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load i18n %}
+
+
+{% block title %}
+    Регистрация
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/signup.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="content_type-signup">
+        <div class="page-header">
+            <h1 class="text__page-header">
+                Регистрация
+            </h1>
+        </div>
+        <div class="signup-to-login__wrapper">
+            <div class="to-signup__container">
+                <h4>Уже с нами?</h4>
+                <a href="{% url 'account_login' %}">
+                    <button class="to-signup-btn">Войти</button>
+                </a>
+            </div>
+            <div class="signup__content-section">
+                <div class="signup__container">
+                    <div class="signup__form">
+                        <form class="signup" method="POST" action="{% url 'account_signup' %}">
+                            {% for error in form.errors %}
+                                {{ error }}
+                            {% endfor %}
+                            
+                            {% csrf_token %}
+                            <div class="form-field signup__form-field">
+                                {{ form.first_name }}
+                            </div>
+                            <div class="form-field signup__form-field">
+                                {{ form.last_name }}
+                            </div>
+                            <div class="form-field signup__form-field">
+                                {{ form.phone }}
+                            </div>
+                            <div class="form-field signup__form-field">
+                                {{ form.email }}
+                            </div>
+                            <div class="form-field signup__form-field">
+                                {{ form.login }}
+                            </div>
+                            <div class="form-field signup__form-field">
+                                {{ form.password1 }}
+                            </div>
+                            <div class="form-field signup__form-field">
+                                {{ form.password2 }}
+                            </div>
+                            {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+                            <button class="signup__form-btn" type="submit">Регистрация</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

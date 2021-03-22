@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    история покупок
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/profile.css' %}"         rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="content_type-profile">
+        <div class="page-header">
+            <h1 class="text__page-header">
+                История покупок
+            </h1>
+        </div>
+
+        <div class="profile__content-section">
+            <div class="profile-products-container">
+                <div class="profile-products-container__card-wrapper">
+
+                    {% if not orders.count %}
+
+                        <h3>
+                            У вас ещё нет заказов <a href="{% url 'base' %}">перейдите к покупкам</a>
+                        </h3>
+
+                    {% elif orders.count %}
+                        {% for order in orders %}
+                            <div class="profile-products__card">
+                                <div class="profile-products__card-body">
+                                    <div class="profile-products__card-body__product-info">
+                                        <div class="profile-products__card-body-info">
+                                            <div class="card-body-info--col">
+                                                <h4>Номер заказа</h4>
+                                                <p>{{ order.id }}</p>
+                                            </div>
+                                            <div class="card-body-info--col">
+                                                <h4>Дата</h4>
+                                                <p>{{ order.date_order }}</p>
+                                            </div>
+                                            <div class="card-body-info--col">
+                                                <h4>Статус</h4>
+                                                <p>{{ order.status }}</p>
+                                            </div>
+                                            <div class="card-body-info--col">
+                                                <h4>Количество</h4>
+                                                <p>{{ order.cart.total_products }}</p>
+                                            </div>
+                                            <div class="card-body-info--col">
+                                                <h4>Сумма</h4>
+                                                <p>{{ order.cart.final_price }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="profile-products__card-body-total-sum">
+                                            <button class="profile__summary__order-button"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModal-{{ order.id }}">
+                                                ПОДРОБНЕЕ
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    {% endif %}
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="background-circle--top"></div>
+        <div class="background-circle--bottom"></div>
+
+    </div>
+
+    {% for order in orders %}
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal-{{ order.id }}" tabindex="-1" aria-labelledby="exampleModalLabel-{{ order.id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel-{{ order.id }}">Детали заказа</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title">Товар</h4>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>Изображение</td>
+                                <td>Наименование</td>
+                                <td>Цена</td>
+                                <td>Количество</td>
+                                <td>Общая цена</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for product_cart in order.cart.products.all %}
+                                <tr>
+                                    <td class="img-fluid modal-order__img">
+                                        <img src="{{ product_cart.product.get_main_img.url }}" alt=""
+                                             class="modal-order__img">
+                                    </td>
+                                    <td>
+                                        <a href="{{ product_cart.product.get_absolute_url }}">{{ product_cart.product.title }}</a>
+                                    </td>
+                                    <td>
+                                        {% if product_cart.product.discount_price %}
+                                            <span class="mr-1">
+                                                        <del>Цена: {{ product_cart.product.price }} грн.</del>
+                                                    </span>
+                                            <p>Цена: {{ product_cart.product.discount_price }}</p>
+                                        {% else %}
+                                            <p>Цена: {{ product_cart.product.price }}</p>
+                                        {% endif %}</td>
+                                    <td>{{ product_cart.qty }}</td>
+                                    <td>{{ product_cart.final_price }} грн.</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="2"></td>
+                                <td>Итого:</td>
+                                <td>{{ order.cart.total_products }}</td>
+                                <td>{{ order.cart.final_price }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <h4 class="text-center">Дополнительная информация</h4>
+                        <p>Имя: {{ order.first_name }}</p>
+                        <p>Фамилия: {{ order.last_name }}</p>
+                        <p>Телефон: {{ order.phone }}</p>
+                        <p>Город: {{ order.shipping_address.city }}</p>
+                        <p>Область: {{ order.shipping_address.region }}</p>
+                        <p>Улица: {{ order.shipping_address.address }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

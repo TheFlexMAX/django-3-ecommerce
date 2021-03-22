@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Результаты поиска
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/category_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="content_type-products">
+
+        <div class="page-header">
+            <div class="page-header__filter-container">
+                <button class="filter-btn"></button>
+            </div>
+            <h1 class="text__page-header">
+                ПОИСК
+            </h1>
+        </div>
+
+        {% include 'include/filter.html' %}
+    
+        <div class="products__slider-container"></div>
+        <div class="products__content-section">
+            <div class="products-container">
+                <div class="products-container__card-wrapper">
+
+                    {% for product in products %}
+
+                        {% include 'include/category_product_card.html' %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                {% include 'include/pagination_search.html' %}
+            </div>
+        </div>
+
+        <div class="background-circle--top"></div>
+        <div class="background-circle--bottom"></div>
+
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/category_detail.js' %}"></script>
+{% endblock %}
